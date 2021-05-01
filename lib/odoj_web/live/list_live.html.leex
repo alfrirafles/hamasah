@@ -1,9 +1,9 @@
 <div class="flex flex-row justify-between p-4 mx-4">
     <h1 class="font-bold text-2xl">Catatan Keluarga</h1>
     <div class="flex flex-row space-x-2">
-        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "all", do: "bg-green-700" %>" phx-click="filter-all">Semua</button>
-        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%=if @mode == "today", do: "bg-green-700" %>" phx-click="filter-today">Hari ini</button>
-        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "only-me", do: "bg-green-700" %>" phx-click="filter-me" phx-value-member_id="<%= if @member, do: @member.id %>">
+        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "all", do: "bg-purple-600" %>" phx-click="filter-all">Semua</button>
+        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%=if @mode == "today", do: "bg-purple-600" %>" phx-click="filter-today">Hari ini</button>
+        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "only-me", do: "bg-purple-600" %>" phx-click="filter-me" phx-value-member_id="<%= if @member, do: @member.id %>">
             Saya
         </button>
     </div>
@@ -43,5 +43,5 @@
     <% end %>
 </div>
 <div class="flex justify-center my-4">
-    <%= live_redirect "Kembali ke Catatan Pribadi", to: Routes.tracker_path(@socket, :index), class: "text-center font-bold text-white bg-gray-400 px-8 py-2 rounded" %>
+    <%= live_redirect "Kembali ke Catatan Pribadi", to: Routes.tracker_path(@socket, :index), class: "text-center font-bold text-white bg-purple-600 px-8 py-2 rounded" %>
 </div>

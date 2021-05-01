@@ -1,7 +1,7 @@
 <%= form_for @conn, Routes.member_session_path(@conn, :create), [as: :member], fn f -> %>
 <div class="flex justify-center items-center h-screen">
-    <div class="flex flex-col justify-around border border-gray-400 rounded space-y-4 p-4 m-8
-                h-3/4 lg:w-2/4 md:self-center">
+    <div class="flex flex-col justify-around border-4 border-purple-400 rounded space-y-4 p-4 m-8
+                h-3/4 lg:w-2/4 md:self-center shadow-lg">
         <%= if @error_message do %>
         <div class="alert alert-danger">
             <p><%= @error_message %></p>
@@ -12,8 +12,8 @@
             <p><%= get_flash(@conn, :info) %></p>
         </div>
         <% end %>
-        <h1 class="font-bold text-2xl text-center">One Day One Juz <br> 7th Heaven Family</h1>
-        <p class="text-center text-2xl">جَنّٰتُ عَدْنٍ يَّدْخُلُوْنَهَا وَمَنْ صَلَحَ مِنْ اٰبَاۤىِٕهِمْ وَاَزْوَاجِهِمْ
+        <h1 class="text-2xl text-center"><span class="font-bold text-purple-600">Hamasah</span><br> Rekapan Kajian</h1>
+        <p class="text-center text-2xl text-purple-600">جَنّٰتُ عَدْنٍ يَّدْخُلُوْنَهَا وَمَنْ صَلَحَ مِنْ اٰبَاۤىِٕهِمْ وَاَزْوَاجِهِمْ
             وَذُرِّيّٰتِهِمْ وَالْمَلٰۤىِٕكَةُ يَدْخُلُوْنَ عَلَيْهِمْ مِّنْ كُلِّ بَابٍۚ - ٢٣
             <span class="font-bold"> الرّعد</span>
         </p>
@@ -27,15 +27,11 @@
                     <%= label f, :password, "Key", required: true, class: "text-2xl w-1/6" %>
                     <%= password_input f, :password, required: true, class: "border border-gray-400 rounded w-2/3 px-1" %>
                 </div>
-                <div class="flex flex-row justify-center space-x-2 md:px-12 w-full items-center">
-                    <%= checkbox f, :remember_me %>
-                    <%= label f, :remember_me, "Buat saya tetap login untuk 60 hari" %>
-                </div>
             </div>
             <%= submit "Masuk",
-            class: "border border-gray-400 bg-gray-400 rounded px-16 py-1 text-white text-2xl font-bold self-center" %>
+            class: "border border-gray-400 bg-purple-600 rounded px-16 py-1 text-white text-2xl font-bold self-center" %>
         </div>
-        <small class="text-center">Made with love @ 2021</small>
+        <small class="text-center">Alfriyadi Rafles @ 2021</small>
     </div>
 </div>
 <% end %>

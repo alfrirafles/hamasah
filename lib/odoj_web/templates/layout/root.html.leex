@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "One Day One Juz", suffix: " · 7th Heaven Family" %>
+    <%= live_title_tag assigns[:page_title] || "Hamasah", suffix: " · Rekapan Kajian" %>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
@@ -18,7 +18,7 @@
     <%= @inner_content %>
     <%= if @current_member do %>
     <div class="my-4 mx-auto flex justify-center items-center text-center text-2xl text-blue-500 underline font-bold px-2 py-2 rounded w-1/12">
-      <%= link "Keluar", to: Routes.member_session_path(@conn, :delete), method: :delete, class: "self-center" %>
+      <%= link "Keluar", to: Routes.member_session_path(@conn, :delete), method: :delete, class: "self-center text-purple-600" %>
     </div>
     <% end %>
   </body>

@@ -1,4 +1,4 @@
-<div class="flex flex-row border border-gray-400 rounded p-2 mt-4 mx-4 items-center justify-between space-x-4">
+<div class="flex flex-row border border-gray-400 rounded p-2 mt-4 mx-4 items-center justify-between space-x-4 shadow-lg">
     <div class="flex flex-col">
         <h1>Assalamualaikum, <span class="font-bold"><%= @member.name %></span></h1>
         <%= if @latest_recite do %>
@@ -27,7 +27,7 @@
 </div>
 <% end %>
 <div class="flex justify-center <%= unless @message, do: "mt-4" %>">
-    <%= live_redirect "Lihat Rekap", to: Routes.list_path(@socket, :index), class: "text-2xl text-blue-500 underline" %>
+    <%= live_redirect "Lihat Rekap", to: Routes.list_path(@socket, :index), class: "text-2xl text-purple-600 underline" %>
 </div>
 <form id="tracker-form" phx-submit="record-log">
     <input type="hidden" name="member_id" value="<%= @member.id %>">
@@ -35,7 +35,7 @@
     <div class="flex flex-col border border-gray-400 rounded md:border-0 m-4 md:m-0">
         <%= for juz <- @list_juz do %>
         <div class="flex flex-row justify-around
-        md:border md:border-gray-400 md:rounded space-x-3 py-1 md:p-2 md:mt-4 md:mx-4 items-center">
+        md:border md:border-gray-400 md:rounded space-x-3 py-1 md:p-2 md:mt-4 md:mx-4 items-center shadow-md">
             <div class="w-1/12 flex justify-center">
                 <input type="checkbox" name="juz-<%= juz.number %>" id="juz-<%= juz.number %>"
                        class="border border-gray-400 rounded h-10 w-10">
@@ -172,6 +172,6 @@
     </div>
 </div>
 <div class="flex flex-col justify-center items-center mt-4">
-    <button class="font-bold text-white text-2xl bg-gray-400 rounded px-20 py-2">Submit</button>
+    <button class="font-bold text-white text-2xl bg-purple-600 rounded px-20 py-2">Submit</button>
 </div>
 </form>
