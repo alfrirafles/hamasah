@@ -12,7 +12,7 @@
 
 alias Odoj.Users
 
-password = "qadar"
+password = "qadr"
 
 users_data = [
   %{name: "Wanti", email: "wanti"},
