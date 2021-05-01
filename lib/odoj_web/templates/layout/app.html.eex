@@ -1,0 +1,4 @@
+<main role="main" class="container mx-auto">
+  <p class="alert alert-danger self-center w-full mt-2" role="alert"><%= get_flash(@conn, :error) %></p>
+  <%= @inner_content %>
+</main>

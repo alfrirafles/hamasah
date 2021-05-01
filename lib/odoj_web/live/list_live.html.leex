@@ -1,0 +1,47 @@
+<div class="flex flex-row justify-between p-4 mx-4">
+    <h1 class="font-bold text-2xl">Catatan Keluarga</h1>
+    <div class="flex flex-row space-x-2">
+        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "all", do: "bg-green-700" %>" phx-click="filter-all">Semua</button>
+        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%=if @mode == "today", do: "bg-green-700" %>" phx-click="filter-today">Hari ini</button>
+        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "only-me", do: "bg-green-700" %>" phx-click="filter-me" phx-value-member_id="<%= if @member, do: @member.id %>">
+            Saya
+        </button>
+    </div>
+</div>
+<div class="px-4 m-4 overflow-scroll h-96 md:h-full">
+    <%= unless is_nil(@list_log) || Enum.count(@list_log) == 0 do %>
+    <table class="table-fixed w-full border border-gray-400 rounded">
+        <thead>
+        <tr class="border-b border-gray-400 text-lg">
+            <th class="px-2">Nama</th>
+            <th class="px-2">Tanggal</th>
+            <th class="px-2">Juz Sekarang</th>
+        </tr>
+        </thead>
+        <tbody class="items-center">
+        <%= for log <- @list_log do %>
+        <tr class="text-center border-b border-gray-400">
+            <% user = Users.get_member!(log.member_id) %>
+            <td class="px-2 py-1"><%= user.name %></td>
+            <td class="px-2 py-1"><%= NaiveDateTime.to_string(log.date) %> </td>
+            <td class="px-2 py-1">
+                <p>Juz <%= log.juz %>
+                    <span class="text-blue-700">
+                        <%= if log.surah do %>
+                        <br>
+                        <%= log.surah %>: <%=log.verse %>
+                        <% end %>
+                    </span>
+                </p>
+            </td>
+        </tr>
+        <% end %>
+        </tbody>
+    </table>
+    <% else %>
+        <p class="text-red-900 text-center text-2xl">Catatan tidak ditemukan.</p>
+    <% end %>
+</div>
+<div class="flex justify-center my-4">
+    <%= live_redirect "Kembali ke Catatan Pribadi", to: Routes.tracker_path(@socket, :index), class: "text-center font-bold text-white bg-gray-400 px-8 py-2 rounded" %>
+</div>
