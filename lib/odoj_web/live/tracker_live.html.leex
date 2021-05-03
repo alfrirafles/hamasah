@@ -75,23 +75,23 @@
                     <%= if surah.surah == juz.surah_start && surah.surah != juz.surah_end do %>
                     <%= if @latest_recite do %>
                     <%= if is_nil(@latest_recite.surah) == false && is_nil(@latest_recite.verse) == false && @latest_recite.juz == juz.number do %>
-                <% end %>
                     <%= if @latest_recite.surah == surah.surah do %>
-                    <%= for number <- Quran.list_verses(@latest_recite.verse, surah.verse_count - 1) do %>
-                    <option><%= number %></option>
+                    <%= for number <- Quran.list_verses(@latest_recite.verse, surah.verse_count) do %>
+                    <option value="<%= surah.surah %>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                     <% end %>
-                                        <% else %>
+                                            <% else %>
                     <%= for number <- Quran.list_verses(juz.verse_start, surah.verse_count - 1) do %>
                     <%= if number < @latest_recite.verse && surah.surah == @latest_recite.surah do %>
-                                                <% else %>
+                                                    <% else %>
                     <option value="<%= surah.surah %>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                     <% end %>
+                                                <% end %>
                                             <% end %>
-                                        <% end %>
-                                    <% else %>
+                                        <% else %>
                     <%= for number <- Quran.list_verses(juz.verse_start, surah.verse_count - 1) do %>
                     <option value="<%= surah.surah %>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                     <% end %>
+                                        <% end %>
                                     <% end %>
                                 <% end %>
                     <%= if surah.surah != juz.surah_start && surah.surah != juz.surah_end do %>
@@ -114,7 +114,7 @@
         <hr class="md:hidden">
         <div class="flex flex-row justify-end md:hidden px-3 pt-2 space-x-4">
             <label for="juz-<%= juz.number %>-selector-sm" class="font-bold">Akhir Bacaan</label>
-            <select id="juz-<%= juz.number %>-selector-sm" name="juz-progress-<%= juz.number %>-sm" class="border border-gray-400">
+            <select id="juz-<%= juz.number %>-selector-sm" name="juz-<%= juz.number %>-progress-sm" class="border border-gray-400">
                 <option value="">Pilih surah..</option>
                 <%= for surah <- Quran.split_by_juz(juz.number) do %>
                 <%= if @latest_recite && surah.surah == @latest_recite.surah && juz.number == @latest_recite.juz do %>
@@ -132,23 +132,23 @@
                 <%= if surah.surah == juz.surah_start && surah.surah != juz.surah_end do %>
                 <%= if @latest_recite do %>
                 <%= if is_nil(@latest_recite.surah) == false && is_nil(@latest_recite.verse) == false && @latest_recite.juz == juz.number do %>
-                <% end %>
                 <%= if @latest_recite.surah == surah.surah do %>
-                <%= for number <- Quran.list_verses(@latest_recite.verse, surah.verse_count - 1) do %>
-                <option><%= number %></option>
+                <%= for number <- Quran.list_verses(@latest_recite.verse, surah.verse_count) do %>
+                <option value="<%= surah.surah %>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                 <% end %>
-                                        <% else %>
+                                            <% else %>
                 <%= for number <- Quran.list_verses(juz.verse_start, surah.verse_count - 1) do %>
                 <%= if number < @latest_recite.verse && surah.surah == @latest_recite.surah do %>
-                                                <% else %>
+                                                    <% else %>
                 <option value="<%= surah.surah %>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                 <% end %>
+                                                <% end %>
                                             <% end %>
-                                        <% end %>
-                                    <% else %>
+                                        <% else %>
                 <%= for number <- Quran.list_verses(juz.verse_start, surah.verse_count - 1) do %>
                 <option value="<%= surah.surah %>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                 <% end %>
+                                        <% end %>
                                     <% end %>
                                 <% end %>
                 <%= if surah.surah != juz.surah_start && surah.surah != juz.surah_end do %>

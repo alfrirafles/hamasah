@@ -12,7 +12,6 @@ defmodule OdojWeb.TrackerLive do
                       |> Enum.sort_by(&(&1.date), {:desc, NaiveDateTime})
                       |> Enum.at(0)
     input_list = Quran.list_juz
-    IO.inspect most_recent_log
     unless is_nil(most_recent_log) || most_recent_log.juz == 30 do
       list_juz = Enum.drop_while(input_list, fn element_map ->
           if most_recent_log.surah do
@@ -52,9 +51,6 @@ defmodule OdojWeb.TrackerLive do
     juz_list = get_juz_input(params)
     if Enum.count(juz_list) != 0 do
       latest_surah_verse = get_juz_progress(juz_list, params)
-                           |> List.first
-                           |> Map.values
-                           |> List.first
       unless latest_surah_verse == "" do
         [latest_juz | rest] = Enum.reverse(juz_list)
         [latest_surah, latest_verse] = latest_surah_verse
@@ -87,12 +83,19 @@ defmodule OdojWeb.TrackerLive do
   end
 
   def get_juz_progress(juz_list, params) do
-    for map <- params do
-      {key, value} = map
-      filtering_key = "juz-" <> Integer.to_string(List.last(juz_list)) <> "-progress"
-      if Map.has_key?(%{key => value}, filtering_key), do: Map.merge(%{}, %{key => value})
+    filtered_params = for map <- params do
+      filter_input_params(map, "juz-" <> Integer.to_string(List.last(juz_list)) <> "-progress")
+    end |> Enum.reject(fn element -> is_nil(element) end) |> List.first |> Map.values |> List.first |> String.split(":")
+
+    filtered_params_sm = for map <- params do
+      filter_input_params(map, "juz-" <> Integer.to_string(List.last(juz_list)) <> "-progress-sm")
+    end |> Enum.reject(fn element -> is_nil(element) end) |> List.first |> Map.values |> List.first |> String.split(":")
+
+    if tl(filtered_params) > tl(filtered_params_sm) do
+      Enum.join(filtered_params, ":")
+      else
+      Enum.join(filtered_params_sm, ":")
     end
-    |> Enum.reject(fn element -> is_nil(element) end)
   end
 
   def get_juz_input(params) do
@@ -123,5 +126,10 @@ defmodule OdojWeb.TrackerLive do
          end
        )
     |> Enum.reverse
+  end
+
+  defp filter_input_params(map, filtering_key) do
+    {key, value} = map
+    if Map.has_key?(%{key => value}, filtering_key), do: Map.merge(%{}, %{key => value})
   end
 end
