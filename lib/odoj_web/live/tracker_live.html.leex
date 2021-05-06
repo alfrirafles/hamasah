@@ -1,20 +1,27 @@
-<div class="flex flex-row border border-gray-400 rounded p-2 mt-4 mx-4 items-center justify-between space-x-4 shadow-lg">
+<div class="flex flex-row border border-gray-400 rounded p-2 mx-4 items-center justify-between space-x-4 bg-white opacity-80 md:bg-none md:opacity-100">
     <div class="flex flex-col">
-        <h1>Assalamualaikum, <span class="font-bold"><%= @member.name %></span></h1>
+        <h1 class="text-ramadan-purple md:text-black">Assalamualaikum, <span class="font-bold"><%= @member.name %></span>
+        </h1>
         <%= if @latest_recite do %>
-            <%= if @latest_recite.surah && @latest_recite.verse do %>
-                <p>Bacaan Terakhir: <span class="font-bold text-green-800"><%= @latest_recite.surah %>: <%= @latest_recite.verse %></span></p>
-            <% else %>
-                <p>Bacaan Terakhir: <span class="font-bold"><%= @latest_recite_detail.surah_end %> : <%= @latest_recite_detail.verse_end %></span></p>
-            <% end %>
+        <%= if @latest_recite.surah && @latest_recite.verse do %>
+        <p class="text-ramadan-purple md:text-black">Bacaan Terakhir: <span
+                class="font-bold text-ramadan-gold md:text-green-400"><%= @latest_recite.surah %>: <%= @latest_recite.verse %></span>
+        </p>
+        <% else %>
+        <p class="text-ramadan-purple md:text-black">Bacaan Terakhir: <span
+                class="font-bold text-ramadan-gold md:text-green-400">
+            <%= @latest_recite_detail.surah_end %> : <%= @latest_recite_detail.verse_end %>
+        </span>
+        </p>
         <% end %>
-        <p class="text-2xl"><%= Timer.current_date %></p>
+        <% end %>
+        <p class="text-ramadan-purple md:text-black text-2xl"><%= Timer.current_date %></p>
     </div>
     <div class="flex flex-row space-x-3">
         <div class="flex flex-col items-center">
-            <p class="text-center font-bold">Juz <br> Terakhir</p>
+            <p class="text-center text-ramadan-purple md:text-black font-bold">Juz <br> Terakhir</p>
             <%= if @latest_recite do %>
-            <p class="font-bold text-4xl"><%= @latest_recite.juz %></p>
+            <p class="font-bold text-ramadan-gold md:text-ramadan-gold text-4xl"><%= @latest_recite.juz %></p>
             <% else %>
             <p class="font-bold text-4xl">-</p>
             <% end %>
@@ -27,42 +34,43 @@
 </div>
 <% end %>
 <div class="flex justify-center <%= unless @message, do: "mt-4" %>">
-    <%= live_redirect "Lihat Rekap", to: Routes.list_path(@socket, :index), class: "text-2xl text-purple-600 underline" %>
+    <%= live_redirect "Lihat Rekap", to: Routes.list_path(@socket, :index), class: "text-ramadan-purple bg-white rounded md:rounded-none md:bg-none font-bold text-2xl md:text-blue-500 px-4 py-2 underline opacity-80 md:opacity-100" %>
 </div>
 <form id="tracker-form" phx-submit="record-log">
     <input type="hidden" name="member_id" value="<%= @member.id %>">
-<div class="overflow-y-auto h-96 my-2 lg:h-full">
-    <div class="flex flex-col border border-gray-400 rounded md:border-0 m-4 md:m-0">
-        <%= for juz <- @list_juz do %>
-        <div class="flex flex-row justify-around
-        md:border md:border-gray-400 md:rounded space-x-3 py-1 md:p-2 md:mt-4 md:mx-4 items-center shadow-md">
-            <div class="w-1/12 flex justify-center">
-                <input type="checkbox" name="juz-<%= juz.number %>" id="juz-<%= juz.number %>"
-                       class="border border-gray-400 rounded h-10 w-10">
-            </div>
-            <div class="w-1/12 flex flex-col items-center">
-                <p class="font-bold text-sm">Juz</p>
-                <label for="juz-@id" class="font-bold text-4xl"><%= juz.number %></label>
-            </div>
-            <div class="w-3/12 flex flex-col">
-                <p class="font-bold">Awal</p>
-                <p><%= juz.surah_start %>: <%= juz.verse_start %></p>
-            </div>
-            <div class="w-3/12 flex flex-col">
-                <p class="font-bold">Akhir</p>
-                <p><%= juz.surah_end %>: <%= juz.verse_end %></p>
-            </div>
-            <div class="w-4/12 flex flex-col items-center hidden md:flex md:flex-col">
-                <label for="juz-<%= juz.number %>-selector" class="font-bold">Akhir Bacaan</label>
-                <select id="juz-<%= juz.number %>-selector"
-                        name="juz-<%= juz.number %>-progress"
-                        class="w-2/3 border border-gray-400"
-                        form="tracker-form">
-                    <option value="">Pilih surah..</option>
-                    <%= for surah <- Quran.split_by_juz(juz.number) do %>
+    <div class="overflow-y-auto h-96 my-2 lg:h-full">
+        <div class="flex flex-col border-t border-b border-gray-400 rounded md:border-0 m-4 md:m-0">
+            <%= for juz <- @list_juz do %>
+            <div class="flex flex-row justify-around bg-white md:bg-none opacity-80 md:opacity-100
+        md:border md:border-gray-400 md:rounded space-x-3 py-1 md:p-2 md:mt-4 md:mx-4 items-center">
+                <div class="w-1/12 flex justify-center">
+                    <input type="checkbox" name="juz-<%= juz.number %>" id="juz-<%= juz.number %>"
+                           class="border border-gray-400 rounded h-10 w-10">
+                </div>
+                <div class="w-1/12 flex flex-col items-center">
+                    <p class="font-bold text-sm text-ramadan-purple">Juz</p>
+                    <label for="juz-@id" class="text-ramadan-gold font-bold text-4xl"><%= juz.number %></label>
+                </div>
+                <div class="w-3/12 flex flex-col">
+                    <p class="font-bold text-ramadan-purple">Awal</p>
+                    <p class=text-ramadan-purple><%= juz.surah_start %>: <%= juz.verse_start %></p>
+                </div>
+                <div class="w-3/12 flex flex-col">
+                    <p class="font-bold text-ramadan-purple">Akhir</p>
+                    <p class="text-ramadan-purple"><%= juz.surah_end %>: <%= juz.verse_end %></p>
+                </div>
+                <div class="w-4/12 flex flex-col items-center hidden md:flex md:flex-col">
+                    <label for="juz-<%= juz.number %>-selector" class="font-bold text-ramadan-purple">Akhir
+                        Bacaan</label>
+                    <select id="juz-<%= juz.number %>-selector"
+                            name="juz-<%= juz.number %>-progress"
+                            class="w-2/3 border border-gray-400"
+                            form="tracker-form">
+                        <option value="">Pilih surah..</option>
+                        <%= for surah <- Quran.split_by_juz(juz.number) do %>
                         <%= if @latest_recite && surah.surah == @latest_recite.surah && juz.number == @latest_recite.juz do %>
                             <%= for number <- Quran.list_verses(@latest_recite.verse, juz.verse_end) do %>
-                                <option value="<%= surah.surah%>:<%= number %>" <%=if @latest_recite.verse == number, do: "selected" %>><%= surah.surah %>: <%= number %></option>
+                                <option value="<%= surah.surah%>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                             <% end %>
                         <% else %>
                             <%= if @latest_recite && @latest_recite.juz == juz.number do %>
@@ -111,19 +119,21 @@
                             <% end %>
                         <% end %>
                     <% end %>
-                </select>
-                <small class="text-red-900">*Pilih hanya jika bacaan belum selesai</small>
+                    </select>
+                    <small class="text-red-900">*Pilih hanya jika bacaan belum selesai</small>
+                </div>
             </div>
-        </div>
-        <hr class="md:hidden">
-        <div class="flex flex-row justify-end md:hidden px-3 pt-2 space-x-4">
-            <label for="juz-<%= juz.number %>-selector-sm" class="font-bold">Akhir Bacaan</label>
-            <select id="juz-<%= juz.number %>-selector-sm" name="juz-<%= juz.number %>-progress-sm" class="border border-gray-400">
-                <option value="">Pilih surah..</option>
-                <%= for surah <- Quran.split_by_juz(juz.number) do %>
+            <hr class="md:hidden">
+            <div class="flex flex-row justify-end md:hidden px-3 pb-2 pt-2 space-x-4 bg-white opacity-70 md:opacity-100">
+                <label for="juz-<%= juz.number %>-selector-sm" class="font-bold text-ramadan-purple">Akhir Bacaan</label>
+                <div class="flex flex-col">
+                    <select id="juz-<%= juz.number %>-selector-sm" name="juz-<%= juz.number %>-progress-sm"
+                            class="border border-gray-400">
+                        <option value="">Pilih surah..</option>
+                        <%= for surah <- Quran.split_by_juz(juz.number) do %>
                         <%= if @latest_recite && surah.surah == @latest_recite.surah && juz.number == @latest_recite.juz do %>
                             <%= for number <- Quran.list_verses(@latest_recite.verse, juz.verse_end) do %>
-                                <option value="<%= surah.surah%>:<%= number %>" <%=if @latest_recite.verse == number, do: "selected" %>><%= surah.surah %>: <%= number %></option>
+                                <option value="<%= surah.surah%>:<%= number %>"><%= surah.surah %>: <%= number %></option>
                             <% end %>
                         <% else %>
                             <%= if @latest_recite && @latest_recite.juz == juz.number do %>
@@ -172,14 +182,17 @@
                             <% end %>
                         <% end %>
                     <% end %>
-            </select>
+                    </select>
+                    <small class="self-end px-2 text-red-400 md:hidden">*Pilih jika juz belum selesai</small>
+                </div>
+            </div>
+            <hr class="md:hidden border-b-2 border-transparent">
+            <% end %>
         </div>
-            <small class="self-end px-2 text-red-900 md:hidden">*Pilih jika juz belum selesai</small>
-        <hr class="md:hidden border-2 border-gray-400">
-        <% end %>
     </div>
-</div>
-<div class="flex flex-col justify-center items-center mt-4">
-    <button class="font-bold text-white text-2xl bg-purple-600 rounded px-20 py-2">Submit</button>
-</div>
+    <div class="flex flex-col justify-center items-center mt-4">
+        <button class="font-bold text-ramadan-purple md:text-white text-2xl bg-white md:bg-gray-400 opacity-80 md:opacity-100 rounded px-20 py-2">
+            Submit
+        </button>
+    </div>
 </form>

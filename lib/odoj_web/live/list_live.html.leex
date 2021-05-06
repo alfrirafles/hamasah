@@ -1,16 +1,16 @@
-<div class="flex flex-row justify-between p-4 mx-4">
-    <h1 class="font-bold text-2xl">Rekapan Kajian</h1>
+<div class="flex flex-row justify-between p-4 rounded mt-2 mx-4 bg-white opacity-80 md:opacity-100">
+    <h1 class="font-bold text-2xl text-ramadan-purple">Rekapan Kajian</h1>
     <div class="flex flex-row space-x-2">
-        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "all", do: "bg-purple-600" %>" phx-click="filter-all">Semua</button>
-        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%=if @mode == "today", do: "bg-purple-600" %>" phx-click="filter-today">Hari ini</button>
-        <button class="text-white font-bold bg-gray-400 px-2 py-1 rounded <%= if @mode == "only-me", do: "bg-purple-600" %>" phx-click="filter-me" phx-value-member_id="<%= if @member, do: @member.id %>">
+        <button class="text-white font-bold bg-gray-400 opacity-100 px-2 py-1 rounded <%= if @mode == "all", do: "bg-ramadan-purple" %>" phx-click="filter-all">Semua</button>
+        <button class="text-white font-bold bg-gray-400 opacity-100 px-2 py-1 rounded <%=if @mode == "today", do: "bg-ramadan-purple" %>" phx-click="filter-today">Hari ini</button>
+        <button class="text-white font-bold bg-gray-400 opacity-100 px-2 py-1 rounded <%= if @mode == "only-me", do: "bg-ramadan-purple" %>" phx-click="filter-me" phx-value-member_id="<%= if @member, do: @member.id %>">
             Saya
         </button>
     </div>
 </div>
 <div class="px-4 m-4 overflow-scroll h-96 md:h-full">
     <%= unless is_nil(@list_log) || Enum.count(@list_log) == 0 do %>
-    <table class="table-fixed w-full border border-gray-400 rounded">
+    <table class="text-ramadan-purple table-fixed w-full border border-gray-400 rounded bg-white opacity-80 md:opacity-100">
         <thead>
         <tr class="border-b border-gray-400 text-lg">
             <th class="px-2">Nama</th>
@@ -26,7 +26,7 @@
             <td class="px-2 py-1"><%= NaiveDateTime.to_string(log.date) %> </td>
             <td class="px-2 py-1">
                 <p>Juz <%= log.juz %>
-                    <span class="text-blue-700">
+                    <span class="text-ramadan-gold">
                         <%= if log.surah do %>
                         <br>
                         <%= log.surah %>: <%=log.verse %>
@@ -39,9 +39,9 @@
         </tbody>
     </table>
     <% else %>
-        <p class="text-red-900 text-center text-2xl">Catatan tidak ditemukan.</p>
+        <p class="text-white font-bold text-center text-2xl">Catatan tidak ditemukan.</p>
     <% end %>
 </div>
 <div class="flex justify-center my-4">
-    <%= live_redirect "Kembali ke Catatan Pribadi", to: Routes.tracker_path(@socket, :index), class: "text-center font-bold text-white bg-purple-600 px-8 py-2 rounded" %>
+    <%= live_redirect "Kembali ke Catatan Pribadi", to: Routes.tracker_path(@socket, :index), class: "text-center font-bold text-ramadan-purple md:text-white px-8 py-2 rounded bg-white md:bg-gray-400 opacity-80 md:opacity-100" %>
 </div>

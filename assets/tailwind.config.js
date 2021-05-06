@@ -7,7 +7,16 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+        colors: {
+            'ramadan-purple':  '#28095F',
+            'ramadan-gold': '#E29D13'
+        },
+        backgroundImage: theme => ({
+            'home-page': "url('/images/home.png')",
+            'tracker-page': "url('/images/tracker.png')"
+        })
+    },
   },
   variants: {
     extend: {},

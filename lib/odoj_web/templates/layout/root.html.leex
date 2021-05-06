@@ -10,6 +10,7 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
+  <div class="bg-tracker-page md:bg-none h-screen py-2">
     <%= if Mix.env() == :dev do %>
     <div class="flex justify-center">
       <p class="text-blue-500 bg-blue-200 self-center shadow text-center w-full py-2 text-4xl">Debugging Mode</p>
@@ -17,9 +18,10 @@
     <% end %>
     <%= @inner_content %>
     <%= if @current_member do %>
-    <div class="my-4 mx-auto flex justify-center items-center text-center text-2xl text-blue-500 underline font-bold px-2 py-2 rounded w-1/12">
-      <%= link "Keluar", to: Routes.member_session_path(@conn, :delete), method: :delete, class: "self-center text-purple-600" %>
+    <div class="mx-auto flex justify-center items-center text-center text-2xl text-blue-500 underline font-bold px-2 rounded w-1/12">
+      <%= link "Keluar", to: Routes.member_session_path(@conn, :delete), method: :delete, class: "text-ramadan-purple bg-white md:bg-none rounded px-4 py-2 mt-4 md:rounded-none opacity-80 md:opacity-100 md:text-blue-500 self-center" %>
     </div>
     <% end %>
+  </div>
   </body>
 </html>
